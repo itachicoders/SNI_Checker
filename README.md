@@ -1,5 +1,7 @@
 # SNI Checker
 
+[![Android Build](https://github.com/itachicoders/SNI_Checker/actions/workflows/android.yml/badge.svg)](https://github.com/itachicoders/SNI_Checker/actions/workflows/android.yml)
+
 Fast Android utility for checking SNI host availability over TLS and collecting working domains into exportable result files.
 
 SNI Checker is built for large domain lists, responsive scanning, and low APK size. The app uses a minimal Jetpack Compose UI, bounded concurrency, batched UI updates, and optimized APK packaging.
@@ -91,8 +93,58 @@ Generated APKs:
 
 ```text
 app/build/outputs/apk/debug/app-debug.apk
+app/build/outputs/apk/release/app-release.apk
 app/build/outputs/apk/release/app-release-unsigned.apk
 ```
+
+If release signing credentials are configured, Gradle produces a signed release APK. Without signing credentials, release builds remain unsigned.
+
+## GitHub Actions
+
+The repository includes a GitHub Actions workflow that builds APKs automatically on push, pull request, or manual dispatch.
+
+Artifacts are available on the workflow run page:
+
+- `sni-checker-debug-apk`
+- `sni-checker-release-apk`
+
+## APK Signing
+
+Debug builds are signed automatically by the Android Gradle Plugin.
+
+Release signing is configured through environment variables, so private keys are not stored in the repository. For GitHub Actions, add these repository secrets:
+
+- `SIGNING_KEYSTORE_BASE64` - base64-encoded `.jks` or `.keystore` file
+- `SIGNING_KEYSTORE_PASSWORD`
+- `SIGNING_KEY_ALIAS`
+- `SIGNING_KEY_PASSWORD`
+
+Generate a release keystore:
+
+```bash
+keytool -genkeypair \
+  -v \
+  -storetype JKS \
+  -keystore release.jks \
+  -alias sni-checker \
+  -keyalg RSA \
+  -keysize 2048 \
+  -validity 10000
+```
+
+Encode it for GitHub Secrets:
+
+```bash
+base64 -w 0 release.jks
+```
+
+On macOS:
+
+```bash
+base64 -i release.jks
+```
+
+When the secrets are present, GitHub Actions uploads a signed release APK artifact. When they are missing, the workflow still builds and uploads the unsigned release APK.
 
 ## Performance Notes
 
