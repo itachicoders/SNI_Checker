@@ -20,7 +20,19 @@ android {
         }
     }
 
-   buildTypes {
+    signingConfigs {
+        release {
+            def keystorePath = System.getenv("SIGNING_KEYSTORE_PATH")
+            if (keystorePath != null && keystorePath.length() > 0) {
+                storeFile file(keystorePath)
+                storePassword System.getenv("SIGNING_KEYSTORE_PASSWORD")
+                keyAlias System.getenv("SIGNING_KEY_ALIAS")
+                keyPassword System.getenv("SIGNING_KEY_PASSWORD")
+            }
+        }
+    }
+
+    buildTypes {
         debug {
             debuggable false
             minifyEnabled true
@@ -31,6 +43,7 @@ android {
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
 
