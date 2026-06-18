@@ -182,4 +182,5 @@ SNI Checker is intended for diagnostics, connectivity testing, and research on d
 
 ## License
 
-Add a license file before publishing releases. MIT or Apache-2.0 are common choices for open-source Android utilities.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
