@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+     xmlns:android="http://schemas.android.com/apk/res/android"
+     android:layout_height="match_parent"
+     android:layout_width="match_parent"
+     android:fillViewport="true">
+
+    <LinearLayout
+         android:layout_height="wrap_content"
+         android:layout_width="match_parent"
+         android:padding="16dp"
+         android:orientation="vertical">
+
+        <TextView
+             android:layout_height="wrap_content"
+             android:layout_width="wrap_content"
+             android:layout_marginBottom="16dp"
+             android:textSize="24sp"
+             android:layout_gravity="center_horizontal"
+             android:text="SNI Checker"
+             android:textStyle="bold" />
+
+        <TextView
+             android:layout_height="wrap_content"
+             android:layout_width="wrap_content"
+             android:layout_marginBottom="8dp"
+             android:textSize="18sp"
+             android:layout_marginTop="8dp"
+             android:text="Настройки"
+             android:textStyle="bold" />
+
+        <TextView
+             android:layout_height="wrap_content"
+             android:layout_width="wrap_content"
+             android:textSize="12sp"
+             android:layout_marginTop="8dp"
+             android:text="Файл или URL со списком SNI:" />
+
+        <EditText
+             android:layout_height="wrap_content"
+             android:layout_width="match_parent"
+             android:hint="Локальный путь или https:// ссылка"
+             android:padding="8dp"
+             android:textSize="12sp"
+             android:inputType="textUri"
+             android:id="@+id/inputFileEdit" />
+
+        <TextView
+             android:layout_height="wrap_content"
+             android:layout_width="wrap_content"
+             android:textSize="12sp"
+             android:layout_marginTop="8dp"
+             android:text="Папка для результатов:" />
+
+        <EditText
+             android:layout_height="wrap_content"
+             android:layout_width="match_parent"
+             android:hint="/storage/emulated/0/SNIChecker/scan_out"
+             android:padding="8dp"
+             android:textSize="12sp"
+             android:inputType="text"
+             android:id="@+id/outputDirEdit" />
+
+        <LinearLayout
+             android:layout_height="wrap_content"
+             android:layout_width="match_parent"
+             android:orientation="horizontal"
+             android:layout_marginTop="8dp">
+
+            <LinearLayout
+                 android:layout_height="wrap_content"
+                 android:layout_width="0dp"
+                 android:layout_marginEnd="8dp"
+                 android:orientation="vertical"
+                 android:layout_weight="1">
+
+                <TextView
+                     android:layout_height="wrap_content"
+                     android:layout_width="wrap_content"
+                     android:textSize="12sp"
+                     android:text="Параллельность:" />
+
+                <EditText
+                     android:layout_height="wrap_content"
+                     android:layout_width="match_parent"
+                     android:hint="50"
+                     android:padding="8dp"
+                     android:textSize="12sp"
+                     android:inputType="number"
+                     android:id="@+id/concurrencyEdit" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                 android:layout_height="wrap_content"
+                 android:layout_width="0dp"
+                 android:orientation="vertical"
+                 android:layout_weight="1">
+
+                <TextView
+                     android:layout_height="wrap_content"
+                     android:layout_width="wrap_content"
+                     android:textSize="12sp"
+                     android:text="Таймаут (сек):" />
+
+                <EditText
+                     android:layout_height="wrap_content"
+                     android:layout_width="match_parent"
+                     android:hint="5"
+                     android:padding="8dp"
+                     android:textSize="12sp"
+                     android:inputType="number"
+                     android:id="@+id/timeoutEdit" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+             android:layout_height="wrap_content"
+             android:layout_width="match_parent"
+             android:orientation="horizontal"
+             android:layout_marginTop="16dp">
+
+            <Button
+                 android:layout_height="wrap_content"
+                 android:layout_width="0dp"
+                 android:layout_weight="1"
+                 android:id="@+id/startButton"
+                 android:text="Начать" />
+
+            <Button
+                 android:layout_height="wrap_content"
+                 android:layout_width="0dp"
+                 android:enabled="false"
+                 android:layout_weight="1"
+                 android:id="@+id/stopButton"
+                 android:text="Остановить" />
+
+        </LinearLayout>
+
+        <ProgressBar
+             android:layout_height="wrap_content"
+             android:layout_width="match_parent"
+             style="?android:attr/progressBarStyleHorizontal"
+             android:layout_marginTop="16dp"
+             android:id="@+id/progressBar" />
+
+        <TextView
+             android:layout_height="wrap_content"
+             android:layout_width="wrap_content"
+             android:textSize="14sp"
+             android:layout_marginTop="8dp"
+             android:id="@+id/statsText"
+             android:layout_gravity="center_horizontal"
+             android:text="OK: 0 | BLOCKED: 0 | INC: 0"
+             android:textStyle="bold" />
+
+        <TextView
+             android:layout_height="wrap_content"
+             android:layout_width="wrap_content"
+             android:layout_marginBottom="8dp"
+             android:textSize="16sp"
+             android:layout_marginTop="16dp"
+             android:text="Логи:"
+             android:textStyle="bold" />
+
+        <ScrollView
+             android:layout_height="250dp"
+             android:layout_width="match_parent"
+             android:scrollbars="vertical"
+             android:background="#FF000000"
+             android:fillViewport="true"
+             android:padding="8dp"
+             android:id="@+id/scrollView">
+
+            <TextView
+                 android:layout_height="wrap_content"
+                 android:layout_width="match_parent"
+                 android:fontFamily="monospace"
+                 android:textSize="12sp"
+                 android:textColor="#FFFFFFFF"
+                 android:id="@+id/logText"
+                 android:text="Логи появятся здесь..." />
+
+        </ScrollView>
+
+    </LinearLayout>
+
+</ScrollView>
